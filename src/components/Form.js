@@ -17,7 +17,7 @@ const Form = (props) => {
   }
 
  return (
-  <form onSubmit={handleSubmit}>
+  <form className=" dark:text-gray-400 gap-3 flex flex-col items-center" onSubmit={handleSubmit}>
         <h2 className='label-wrapper'>
           <label htmlFor='new-todo-input' className='label__lg'>
             What needs to be done?
@@ -25,14 +25,14 @@ const Form = (props) => {
         </h2>
         <input
         id='new-todo-input'
-        className='input input__lg'
+        className=' dark:border-accent border-slate-600 border-2 w-full'
         name='text'
         autoComplete='off'
         type="text"
         value={name}
         onChange={handleChange}
         />
-        <button type='submit' className='btn btn__primary btn__lg'>
+        <button type='submit' className=' duration-300 transition-all hover:-translate-y-1 dark:hover:text-white dark:hover:bg-accent dark:bg-gray-800 dark:text-white hover:border-accent hover:text-accent border-primary border-2 text-xl py-1 drop-shadow-sm rounded-full w-full'>
           Add
         </button>
       </form>

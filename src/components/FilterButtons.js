@@ -4,14 +4,12 @@ const FilterButton = props => {
  return (
         <button
         type='button'
-        className='btn toggle-btn'
+        className=' hover:opacity-50 w-full flex justify-center rounded-lg py-1 dark:text-white dark:bg-gray-600 border-gray-600 border-2'
         aria-pressed={ props.isPressed }
         id={props.id}
         onClick={() => props.setFilter(props.name)}
         >
-          <span className='visually-hidden'>Show </span>
           <span>{ props.name }</span>
-          <span className='visually-hidden'> tasks</span>
         </button>
  );
 }

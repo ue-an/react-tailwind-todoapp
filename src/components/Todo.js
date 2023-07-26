@@ -19,65 +19,71 @@ const Todo = props => {
   }
 
   const editingTemplate = (
-    <form className="stack-small" onSubmit={handleSubmit}>
-      <div className="form-group">
-        <label className="todo-label" htmlFor={props.id}>
-          New name for {props.name}
+    <form className=" dark:text-gray-300 border-gray-700 border-2 p-3 rounded-md  " onSubmit={handleSubmit}>
+      <div className="flex flex-col gap-3 ">
+        <label className=" text-gray-500">
+          {props.name}
+        </label>
+        <label htmlFor={props.id}>
+          New task name:
         </label>
         <input
         id={props.id}
-        className="todo-text"
         type="text"
         value={newName}
         onChange={handleChange}
         />
       </div>
-      <div className="btn-group">
+      <div className=" py-2 flex gap-3 text-sm">
         <button
         type="button"
-        className="btn todo-cancel"
+        className=" dark:hover:opacity-50 dark:bg-gray-700 hover:opacity-50 dark:text-white border-gray-700 border-2 rounded-md py-1 px-2  "
         onClick={() => {setEditing(false)}}
         >
           Cancel
-          <span className="visually-hidden">renaming {props.name}</span>
         </button>
-        <button type='submit' className="btn btn__primary todo-edit">
+        <button type='submit' className="dark:hover:bg-accent dark:bg-gray-700 dark:text-white hover:text-accent hover:border-accent border-gray-700 border-2 rounded-md py-1 px-2  ">
           Save
-          <span className="visually-hidden">new name for {props.name}</span>
         </button>
       </div>
     </form>
   );
   
   const viewTemplate = (
-    <div className="stack-small">
-    <div className="c-cb">
-        <input
-          id={props.id}
-          type="checkbox"
-          defaultChecked={props.completed}
-          onChange={() => props.toggleTaskCompleted(props.id)}
-        />
-        <label className="todo-label" htmlFor={props.id}>
-          {props.name}
-        </label>
-      </div>
-      <div className="btn-group">
+    <div className=" dark:text-gray-300 grid py-2">
+    <div className="grid-cols-1">
+      <div className=" flex gap-2">
+          <div className=" p-2 flex flex-col justify-start">
+            <input
+              id={props.id}
+              type="checkbox"
+              defaultChecked={props.completed}
+              onChange={() => props.toggleTaskCompleted(props.id)}
+            />
+          </div>
+          <label className="" htmlFor={props.id}>
+            {props.name}
+          </label>
+        </div>
+    </div>
+    <div className=" pl-9 grid-cols-1">
+      <div className=" text-sm flex gap-2">
         <button
         type="button"
-        className="btn"
+        className=" dark:hover:bg-accent dark:bg-gray-600 dark:text-white hover:border-accent hover:text-accent border-primary border-2 rounded-md py-1 px-2"
         onClick={() => setEditing(true)}
         >
-          Edit <span className="visually-hidden">{props.name}</span>
+          Edit 
         </button>
         <button
           type="button"
-          className="btn btn__danger"
+          className=" dark:hover:opacity-50 dark:text-white dark:bg-red-700 hover:opacity-50 text-red-800 border-red-700 border-2 rounded-md py-1 px-2"
           onClick={() => props.deleteTask(props.id)}
         >
-          Delete <span className="visually-hidden">{props.name}</span>
+          Delete
         </button>
       </div>
+    </div>
   </div>
   );
 
