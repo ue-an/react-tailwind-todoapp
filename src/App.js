@@ -1,10 +1,11 @@
-import logo from './logo.svg';
-import './App.css';
 import { Todo } from './components/Todo';
 import { Form } from './components/Form';
 import { FilterButton } from './components/FilterButtons';
 import { useState } from 'react';
 import { nanoid } from 'nanoid';
+import React from 'react';
+import SunIco from './assets/light-mode.png';
+import MoonIco from './assets/dark-mode.png';
 
 const FILTER_MAP = {
   All: () => true,
@@ -89,27 +90,41 @@ function App(props) {
   let taskNoun = taskList.length !== 1 ? 'tasks' : 'task';
   let headingText = `${taskList.length} ${taskNoun} remaining`;
 
+  const [isDark, setIsDark] = useState(false)
+
+  const handleSetIsDark = () => {
+    if (isDark) {
+      document.documentElement.classList.remove('dark')
+      setIsDark(false)
+    }
+    else {
+      document.documentElement.classList.add('dark')
+      setIsDark(true)
+    }
+  }
+
   return (
-    <div className='todoapp stack-large'>
-      <h1>TodoMatic</h1>
-
-      <Form
-      addTask={addTask}
-       />
-
-      <div className='filters btn-group stack-exception'>
-        {/* <FilterButton label="all" pressed="true"/>
-        <FilterButton label="active" pressed="false"/>
-        <FilterButton label="completed" pressed="false"/> */}
-        {filterList}
+    <div className=' duration-300 transition-all dark:bg-primary bg-white flex flex-col h-screen'>
+      <div className=' dark:border-white border-black border-2 drop-shadow-lg rounded-xl flex flex-col gap-3 p-9 w-full max-w-[800px] m-auto text-lg'>
+        <button onClick={handleSetIsDark} className=' dark:text-white flex justify-start'>
+          { isDark ? <img className=' w-9' src={SunIco} /> : <img className='w-6' src={MoonIco} />}
+        </button>
+        <h1 className=' dark:text-accent flex justify-center font-bold text-3xl'>ReactToDo</h1>
+      
+        <Form
+        addTask={addTask}
+         />
+      
+        <div className='flex gap-3'>
+          {filterList}
+        </div>
+        <h2 className='dark:text-gray-300' id='list-heading'>{ headingText }</h2>
+        <ul role="list"
+        className=''
+        >
+        {taskList}
+        </ul>
       </div>
-      <h2 id='list-heading'>{ headingText }</h2>
-      <ul role="list"
-      className='todo-list stack-large stack-exception'
-      aria-labelledby='list-heading'
-      >
-      {taskList}
-      </ul>
     </div>
   );
   
